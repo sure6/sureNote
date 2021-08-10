@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# set session expiration date. default is 2 week
+SESSION_COOKIE_AGE=1*24*3600
+# set session expiration date. default is False
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Application definition
 
