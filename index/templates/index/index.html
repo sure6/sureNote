@@ -11,7 +11,7 @@
     <p>
     欢迎 {{ request.session.username }}
     </p>
-    <p><a href="">退出登录</a></p>
+    <p><a href="/user/logout">退出登录</a></p>
     <p><a href="">进入我的笔记</a></p>
 {% else %}
     {% if request.COOKIES.username %}

@@ -87,18 +87,18 @@ def login_view(request):
         return resp
 
 def logout_view(request):
-    s_session = request.session.get("username")
-    s_uid = request.session.get("uid")
-    c_session = request.COOKIES.get("username")
-    c_uid = request.COOKIES.get("uid")
-
-    if s_session and s_uid:
-        del request.delete_session['username']
+    # 删除session
+    if 'username' in request.session:
+        del request.session['username']
+    if 'uid' in request.session:
         del request.session['uid']
-        if c_session and c_uid:
-            request.delete_cookie("username")
-            request.delete_cookie("uid")
-            return HttpResponseRedirect('/user/login')
+    # 删除cookies
+    resp = HttpResponseRedirect('/index')
+    if 'username' in request.COOKIES:
+        resp.delete_cookie("username")
+    if 'uid' in request.COOKIES:
+        resp.delete_cookie("uid")
+    return resp
 
 
 
