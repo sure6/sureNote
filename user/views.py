@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
@@ -37,7 +37,7 @@ def reg_view(request):
         request.session['username']=username
         request.session['uid']=user.id
         # TODO 修改session存储时间为一天
-        return HttpResponse('注册成功')
+        return HttpResponseRedirect('/index')
 
 
 def login_view(request):
@@ -45,7 +45,7 @@ def login_view(request):
         # 检查登录状态, 如果有显示'已登录'
         # 检查session
         if request.session.get('username') and request.session.get('uid'):
-            return HttpResponse("已登录")
+            return HttpResponseRedirect('/index')
         # 没有session, 检查cookies,如果有则回写session
         c_username=request.COOKIES.get('username')
         c_uid=request.COOKIES.get('uid')
@@ -53,7 +53,7 @@ def login_view(request):
             # 回写session
             request.session['username']=c_username
             request.session['uid']=c_uid
-            return HttpResponse("已登录")
+            return HttpResponseRedirect('/index')
         # 如果都没有则回到登录页面
         return render(request,'user/login.html')
     elif request.method=="POST":
@@ -78,10 +78,27 @@ def login_view(request):
         request.session['username']=uname
         request.session['uid']=old_user.id
 
-        resp = HttpResponse("登录成功")
+        resp = HttpResponseRedirect('/index')
         # 判断用户是否'记住用户名'
         if 'check_remember' in request.POST:
             resp.set_cookie('username',uname,expires=3*24*60*60)
             resp.set_cookie('uid',old_user.id,expires=3*24*60*60)
 
         return resp
+
+def logout_view(request):
+    s_session = request.session.get("username")
+    s_uid = request.session.get("uid")
+    c_session = request.COOKIES.get("username")
+    c_uid = request.COOKIES.get("uid")
+
+    if s_session and s_uid:
+        del request.delete_session['username']
+        del request.session['uid']
+        if c_session and c_uid:
+            request.delete_cookie("username")
+            request.delete_cookie("uid")
+            return HttpResponseRedirect('/user/login')
+
+
+
