@@ -63,3 +63,14 @@ def noteedit_view(request):
         note_info.content=content
         note_info.save()
         return HttpResponseRedirect("list")
+
+# 硬删除
+@check_login
+def notedelete_view(request,id):
+    note_info = Note.objects.get(id=int(id))
+    if note_info:
+        try:
+            note_info.delete()
+            return HttpResponseRedirect("/note/list")
+        except :
+            return HttpResponse('删除失败')

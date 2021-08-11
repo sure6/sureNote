@@ -12,4 +12,5 @@ urlpatterns=[
     path('list', views.list_view),
     path('detail', views.notedetail_view),
     path('edit', views.noteedit_view),
+    path('delete/<int:id>', views.notedelete_view),
 ]
