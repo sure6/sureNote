@@ -5,16 +5,48 @@
     <title>add note</title>
 </head>
 <body>
-<form action="/note/add" method="post" >
+<form {% if flag == "add" %}
+                    action= "/note/add"
+                {% elif flag == "edit"%}
+                  action= "/note/edit"
+            {% endif %}
+      method="post">
+    {% if flag == "edit" %}
+        <input type="text" name="id" value="{{ note_info.id }}" readonly hidden>
+    {% endif %}
+
     <table align="center">
         <caption><h3>请添加笔记</h3></caption>
         <tr>
-            <td  align="center"><label for="title">标题:</label></td>
-            <td  align="center"><input type="text" name="title">&nbsp;&nbsp; <input type="submit" value="保存"></td>
+            <td align="center">
+                <label for="title">标题:</label>
+            </td>
+            <td align="center">
+                <input type="text" name="title"
+                       {% if flag == "detail" or flag == "edit" %}
+                            value="{{ note_info.title }}" disabled="disabled"
+                       {% endif %}
+                >&nbsp;&nbsp;
+                {% if flag != "detail" %}
+                    <input type="submit" value="保存">
+                {% endif %}
+                <a href="/note/list">返回列表</a>
+            </td>
         </tr>
-        <tr><td colspan="2" align="center"><label for="content">添加笔记:</label></td></tr>
         <tr>
-            <td colspan="2" align="center"> <textarea name="content" id="" cols="30" rows="10"></textarea></td>
+            <td colspan="2" align="center">
+                <label for="content">笔记信息:</label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <textarea name="content" id="" cols="30" rows="10"
+                          {% if flag == "detail" %}
+                               disabled="disabled"
+                          {% endif %}
+                >{% if flag == "detail" or flag == "edit" %}{{ note_info.content }}{% endif %}
+                </textarea>
+            </td>
         </tr>
     </table>
 </form>

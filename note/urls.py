@@ -8,6 +8,8 @@ from django.urls import path
 from note import views
 
 urlpatterns=[
-    path('add', views.add_note),
-    path('list_view', views.list_view),
+    path('add', views.addnote_view),
+    path('list', views.list_view),
+    path('detail', views.notedetail_view),
+    path('edit', views.noteedit_view),
 ]

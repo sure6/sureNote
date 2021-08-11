@@ -24,11 +24,11 @@
     {% for foo in noteList %}
     <tr>
         <td>{{ foo.id }}</td>
-        <td>{{ foo.title }}</td>
+        <td><a href="/note/detail?id={{ foo.id }}">{{ foo.title }}</a></td>
         <td>{{ foo.created_time }}</td>
         <td>{{ foo.updated_time }}</td>
         <td>
-            <a href="">修改</a>
+            <a href="/note/edit?id={{ foo.id }}">修改</a>
             <a href="">删除</a>
         </td>
      </tr>
