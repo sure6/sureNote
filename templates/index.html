@@ -9,20 +9,22 @@
 {#{{ request.COOKIES }}#}
 {% if request.session.username %}
     <p>
-    欢迎 {{ request.session.username }}
+        <span>欢迎 {{ request.session.username }}</span>
+        <a href="/user/logout">退出登录</a>
+        <a href="/note/list_view">进入我的笔记</a>
     </p>
-    <p><a href="/user/logout">退出登录</a></p>
-    <p><a href="">进入我的笔记</a></p>
 {% else %}
     {% if request.COOKIES.username %}
     <p>
-    欢迎 {{ request.COOKIES.username }}
+        欢迎 {{ request.COOKIES.username }}
+        <a href="/user/logout">退出登录</a>
+        <a href="">进入我的笔记</a>
     </p>
-    <p><a href="/user/logout">退出登录</a></p>
-    <p><a href="">进入我的笔记</a></p>
     {% else %}
-        <p><a href="/user/login">登录</a></p>
-        <p><a href="/user/reg">注册</a></p>
+    <p>
+        <a href="/user/login">登录</a>
+        <a href="/user/reg">注册</a>
+     </p>
     {% endif %}
 {% endif %}
 </body>

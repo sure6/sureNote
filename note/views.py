@@ -28,4 +28,9 @@ def add_note(request):
         title=request.POST['title']
         content=request.POST['content']
         Note.objects.create(title=title, content=content,user_id=uid)
-        return HttpResponse("插入成功")
+        return HttpResponseRedirect("list_view")
+
+@check_login
+def list_view(request):
+    noteList=Note.objects.all();
+    return render(request,'note/list_note.html',locals())

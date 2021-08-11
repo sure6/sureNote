@@ -9,4 +9,5 @@ from note import views
 
 urlpatterns=[
     path('add', views.add_note),
+    path('list_view', views.list_view),
 ]

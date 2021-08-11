@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列出笔记</title>
+</head>
+<body>
+<p>
+    <span>{{ request.session.username }}的笔记</span>
+    <a href="/user/logout">退出登录</a>
+    <a href="/note/add">添加新笔记</a>
+    <a href="/index">返回首页</a>
+</p>
+<table align="center" border="1px">
+    <caption><h2>笔记列表</h2></caption>
+    <tr>
+        <th>ID</th>
+        <th>标题</th>
+        <th>创建时间</th>
+        <th>修改时间</th>
+        <th>操作</th>
+    </tr>
+    
+    {% for foo in noteList %}
+    <tr>
+        <td>{{ foo.id }}</td>
+        <td>{{ foo.title }}</td>
+        <td>{{ foo.created_time }}</td>
+        <td>{{ foo.updated_time }}</td>
+        <td>
+            <a href="">修改</a>
+            <a href="">删除</a>
+        </td>
+     </tr>
+    {% endfor %}
+    
+    
+</table>
+</body>
+</html>

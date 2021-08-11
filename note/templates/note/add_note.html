@@ -5,11 +5,18 @@
     <title>add note</title>
 </head>
 <body>
-<form action="/note/add" method="post">
-    <p>标题: <input type="text" name="title"> <input type="submit" value="保存"></p>
-    <p>
-        <textarea name="content" id="" cols="30" rows="10"></textarea>
-    </p>
+<form action="/note/add" method="post" >
+    <table align="center">
+        <caption><h3>请添加笔记</h3></caption>
+        <tr>
+            <td  align="center"><label for="title">标题:</label></td>
+            <td  align="center"><input type="text" name="title">&nbsp;&nbsp; <input type="submit" value="保存"></td>
+        </tr>
+        <tr><td colspan="2" align="center"><label for="content">添加笔记:</label></td></tr>
+        <tr>
+            <td colspan="2" align="center"> <textarea name="content" id="" cols="30" rows="10"></textarea></td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>
