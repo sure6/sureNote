@@ -1,3 +1,5 @@
+import json
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -63,22 +65,33 @@ def login_view(request):
         # 判断是否有cookie
 
         if uname=="" or pword=="":
-            return HttpResponse("用户名和密码不能为空")
+            tips={
+                "error":"用户名和密码不能为空"
+            }
+            return HttpResponse(json.dumps(tips,ensure_ascii=False))
 
         try:
             old_user = User.objects.get(username=uname)
         except Exception as e:
             print('--user or password error %s' % e)
-            return HttpResponse("用户名和密码不正确")
+            tips={
+                "error":"用户名和密码不正确"
+            }
+            return HttpResponse(json.dumps(tips, ensure_ascii=False))
 
         if  md5_encryption_tool(pword)!=old_user.password:
-            return HttpResponse("用户名和密码不正确")
+            tips = {
+                "error": "用户名和密码不正确"
+            }
+            return HttpResponse(json.dumps(tips, ensure_ascii=False))
 
         # 记录会话状态
         request.session['username']=uname
         request.session['uid']=old_user.id
-
-        resp = HttpResponseRedirect('/index')
+        redirect={
+            "success":"登录成功"
+        }
+        resp = HttpResponse(json.dumps(redirect, ensure_ascii=False))
         # 判断用户是否'记住用户名'
         if 'check_remember' in request.POST:
             resp.set_cookie('username',uname,expires=3*24*60*60)

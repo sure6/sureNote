@@ -58,12 +58,12 @@
       </form>
       <ul class="nav navbar-nav navbar-right">
         {% if request.session.username %}
-            <li><p style="margin: 15px 0;">欢迎 {{ request.session.username }}</p></li>
+            <li><p style="margin: 15px 0;" class="text-success">欢迎 {{ request.session.username }}</p></li>
             <li><a href="/user/logout">退出登录</a></li>
             <li><a href="/note/list">进入我的笔记</a></li>
         {% else %}
             {% if request.COOKIES.username %}
-                <li><p style="margin: 15px 0;">欢迎 {{ request.COOKIES.username }}</p></li>
+                <li><p style="margin: 15px 0;" class="text-success">欢迎 {{ request.COOKIES.username }}</p></li>
                 <li><a href="/user/logout">退出登录</a></li>
                 <li><a href="/note/list">进入我的笔记</a></li>
             {% else %}
