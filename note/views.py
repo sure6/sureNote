@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -37,7 +38,10 @@ def addnote_view(request):
 
 @check_login
 def list_view(request):
+    page_num = request.GET.get("page",1)
     noteList = Note.objects.all()
+    p = Paginator(noteList,5)
+    page_obj=p.get_page(page_num)
     return render(request, 'note/list_note.html', locals())
 
 

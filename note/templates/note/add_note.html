@@ -43,23 +43,23 @@
 
 
     <div class="form-group">
-        <label for="title" class="col-md-1 control-label">标题:</label>
-        <div class="col-md-9">
+        <label for="title" class="col-md-2 col-sm-4 control-label hidden-xs ">标题:</label>
+        <div class="col-md-6 col-sm-4  col-xs-5">
             <input type="text" name="title"
                        {% if flag == "detail" or flag == "edit" %}
                             value="{{ note_info.title }}" disabled="disabled"
                        {% endif %}
-               class="form-control" id="title">
+               class="form-control" id="title" placeholder="标题">
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4 col-sm-8  col-xs-7">
             {% if flag != "detail" %}
-                <input type="submit" value="保存" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                <input type="submit" value="保存" class="btn btn-primary" >
             {% endif %}
             <a href="/note/list" class="btn btn-warning">返回列表</a>
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="margin: 7px">
          <label for="content" class="control-label">笔记信息:</label>
          <textarea name="content" id="" cols="30" rows="10"
                           {% if flag == "detail" %}
