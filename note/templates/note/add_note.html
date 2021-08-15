@@ -2,53 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <title>add note</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 </head>
 <body>
-<form {% if flag == "add" %}
+<div class="container">
+    <div class="page-header">
+        <h1 class="text-info text-center">请添加笔记</h1>
+    </div>
+    <form {% if flag == "add" %}
                     action= "/note/add"
                 {% elif flag == "edit"%}
                   action= "/note/edit"
             {% endif %}
-      method="post">
-    {% if flag == "edit" %}
-        <input type="text" name="id" value="{{ note_info.id }}" readonly hidden>
-    {% endif %}
+      method="post" class="form-horizontal">
+    {% csrf_token %}
 
-    <table align="center">
-        <caption><h3>请添加笔记</h3></caption>
-        <tr>
-            <td align="center">
-                <label for="title">标题:</label>
-            </td>
-            <td align="center">
-                <input type="text" name="title"
+    <div class="form-group">
+        {% if flag == "edit" %}
+            <label for="id" class="col-lg-2 control-label">id: </label>
+            <div class="col-lg-10">
+                <input type="text" name="id" value="{{ note_info.id }}" readonly hidden class="form-control" id="id">
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label for="title" class="col-md-1 control-label">标题:</label>
+        <div class="col-md-9">
+            <input type="text" name="title"
                        {% if flag == "detail" or flag == "edit" %}
                             value="{{ note_info.title }}" disabled="disabled"
                        {% endif %}
-                >&nbsp;&nbsp;
-                {% if flag != "detail" %}
-                    <input type="submit" value="保存">
-                {% endif %}
-                <a href="/note/list">返回列表</a>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center">
-                <label for="content">笔记信息:</label>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center">
-                <textarea name="content" id="" cols="30" rows="10"
+               class="form-control" id="title">
+        </div>
+        <div class="col-md-2">
+            {% if flag != "detail" %}
+                <input type="submit" value="保存" class="btn btn-primary">
+            {% endif %}
+            <a href="/note/list" class="btn btn-warning">返回列表</a>
+        </div>
+    </div>
+
+    <div class="form-group">
+         <label for="content" class="control-label">笔记信息:</label>
+         <textarea name="content" id="" cols="30" rows="10"
                           {% if flag == "detail" %}
                                disabled="disabled"
                           {% endif %}
-                >{% if flag == "detail" or flag == "edit" %}{{ note_info.content }}{% endif %}
-                </textarea>
-            </td>
-        </tr>
-    </table>
-</form>
+                class="form-control" id="content">
+                {% if flag == "detail" or flag == "edit" %}{{ note_info.content }}{% endif %}
+         </textarea>
+    </div>
+    </form>
+</div>
+
+
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 </body>
 </html>
