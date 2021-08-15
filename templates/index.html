@@ -8,6 +8,26 @@
     <title>首页</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        .adv, .adv .item{
+            height: 500px;
+            overflow: hidden;
+        }
+        @media screen and (max-width: 768px) {
+            .adv, .adv .item{
+            height: 170px;
+            }
+        }
+        .carousel-indicators .active{
+            background-color: black;
+        }
+        .carousel-indicators li{
+            border-color: black;
+        }
+        .navbar{
+            margin-bottom: 0;
+        }
+    </style>
 </head>
 <body>
 {# 导航 #}
@@ -28,7 +48,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">主页 <span class="sr-only">(current)</span></a></li>
-        <li><a href="https://note.youdao.com/web/">有道云笔记</a></li>
+        <li><a href="https://note.youdao.com/web/" target="_blank">有道云笔记</a></li>
       </ul>
       <form class="navbar-form navbar-left" name="search" >
         <div class="form-group">
@@ -56,7 +76,43 @@
   </div>
 </nav>
 {#主体#}
+<div class="container">
+<div id="carousel-example-generic" class="carousel slide adv" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1" ></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2" ></li>
+  </ol>
 
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox" id="adv">
+    <div class="item active">
+      <img src="{% static "sureNote/images/elephant.png" %}" alt="elephant">
+    </div>
+    <div class="item">
+      <img src="{% static "sureNote/images/impress.png" %}" alt="impress">
+    </div>
+    <div class="item">
+      <img src="{% static "sureNote/images/rabbit.jpeg" %}" alt="rabbit">
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</div>
+{#页脚#}
+<div class="container">
+    <h3 class="text-info text-center" id="copyright">&copy;Copyright by leesure on 08/05/2021 </h3>
+</div>
      <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
@@ -68,6 +124,21 @@
             document.search.submit();
             window.location.href=url//如何使该句能够执行，或者怎样写是正确的？;
         }
+        $(function () {
+{#            响应式计算分辨#}
+            console.log($(document).width())
+            console.log($(document).height())
+            if($(document).width()>768){
+                bs=$(document).height()-600;
+                $("#copyright").css("margin-top",bs)
+                console.log("bs:"+bs)
+            }else{
+                mob=$(document).height()-260;
+                $("#copyright").css("margin-top",mob)
+                console.log("mob:"+mob)
+            }
+
+        })
     </script>
 </body>
 </html>
