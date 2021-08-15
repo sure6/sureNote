@@ -11,24 +11,36 @@
 <body>
 <div class="container">
     <div class="page-header">
-        <h1 class="text-info text-center">请添加笔记</h1>
+        <h1 class="text-info text-center">
+            {% if flag == "add"%}
+                请添加笔记
+            {% elif flag == "edit" %}
+                请修改笔记
+            {% else %}
+                请查看笔记
+            {% endif %}
+
+           </h1>
     </div>
+
     <form {% if flag == "add" %}
                     action= "/note/add"
                 {% elif flag == "edit"%}
                   action= "/note/edit"
             {% endif %}
-      method="post" class="form-horizontal">
+      method="post" class="form-horizontal" >
     {% csrf_token %}
 
-    <div class="form-group">
-        {% if flag == "edit" %}
-            <label for="id" class="col-lg-2 control-label">id: </label>
-            <div class="col-lg-10">
+
+    {% if flag == "edit" %}
+        <div class="form-group">
+            <label for="id" class="col-md-1 control-label">id: </label>
+            <div class="col-md-4">
                 <input type="text" name="id" value="{{ note_info.id }}" readonly hidden class="form-control" id="id">
             </div>
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
+
 
     <div class="form-group">
         <label for="title" class="col-md-1 control-label">标题:</label>
@@ -41,7 +53,7 @@
         </div>
         <div class="col-md-2">
             {% if flag != "detail" %}
-                <input type="submit" value="保存" class="btn btn-primary">
+                <input type="submit" value="保存" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
             {% endif %}
             <a href="/note/list" class="btn btn-warning">返回列表</a>
         </div>
@@ -65,5 +77,6 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
 </body>
 </html>
