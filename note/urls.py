@@ -13,4 +13,5 @@ urlpatterns=[
     path('detail', views.notedetail_view),
     path('edit', views.noteedit_view),
     path('delete/<int:id>', views.notedelete_view),
+    path('produce_csv', views.produce_csv_view),
 ]
