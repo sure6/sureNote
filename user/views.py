@@ -89,7 +89,8 @@ def login_view(request):
         request.session['username']=uname
         request.session['uid']=old_user.id
         redirect={
-            "success":"登录成功"
+            "success":"登录成功",
+            "path":"/index"
         }
         resp = HttpResponse(json.dumps(redirect, ensure_ascii=False))
         # 判断用户是否'记住用户名'

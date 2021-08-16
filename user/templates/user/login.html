@@ -46,7 +46,7 @@
                   <input type="checkbox" name="check_remember"> 记住用户名
                 </label>
               </div>
-              <button type="button" class="btn btn-default" onclick="test()">登录</button>
+              <button type="button" class="btn btn-default" onclick="login()">登录</button>
                 {# <button type="button" onclick="test()">序列化</button> #}
                 <p class="pull-right" style="margin: 10px 0 8px;">没有账号? <a href="/user/reg">注册</a></p>
             </form>
@@ -65,40 +65,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-    <script>
-         $.fn.serializeJSON = function () {
-            var obj = {};
-            var count = 0;
-            $.each(this.serializeArray(), function (i, o) {
-                var n = o.name, v = o.value;
-                count++;
-                obj[n] = obj[n] === undefined ? v
-                : $.isArray(obj[n]) ? obj[n].concat(v)
-                : [obj[n], v];
-            });
-            //obj.nameCounts = count + "";//表单name个数
-            return JSON.stringify(obj);
-        };
-        function test() {
-            {#console.log($("#login_form").serializeJSON())#}
-            $.ajax({
-                type:"POST",
-                url:"/user/login",
-                dataType:"json",
-                data:$("#login_form").serialize(),
-                success:function (data) {
-                    if (data.success){
-                        alert(data.success);
-                        window.history.back(-1);
-                        window.location.refresh();
-                    }else {
-                        alert(data.error);
-                    }
-
-                }
-            })
-        }
-
-    </script>
+    <script src="{% static "user/js/ajax_request.js" %}"></script>
 </body>
 </html>
