@@ -1,22 +1,32 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    <title>Regiter-user</title>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-</head>
-<body style="background-color: #F6F6F6">
+{% block title %}Regiter-user{% endblock %}
 
+{% block css_style %}
+    <style>
+        body{
+            background-color: #F6F6F6;
+        }
+        #register_brand{
+            margin-right: 10px;
+        }
+        #body-content{
+            margin: 50px 0 50px 0;
+        }
+        #copyright{
+            margin-top: 18px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
     <div class="container">
         <div class="page-header">
+            <a class="navbar-brand" href="{% url "index" %}"><img src="{% static "user/images/brand.png" %}" alt="brand" width="25px"></a>
             <h1 class="text-primary text-center">欢迎来登录云笔记 <small>请注册</small></h1>
         </div>
         <div class="row">
-            <div class="col-md-4" style="margin: 50px 0;">
+            <div class="col-md-4" id="body-content">
                 <div class="thumbnail">
                     <form action="/user/reg" method="post">
                         {% csrf_token %}
@@ -39,13 +49,13 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <img src="{% static 'user/images/brand.png'%}" alt="brand" width="400px" class="visible-md visible-lg pull-right">
+                <img src="{% static 'user/images/brand.png'%}" alt="brand" width="400px" class="visible-md visible-lg pull-right" id="register_brand">
             </div>
         </div>
 
         <nav class="navbar navbar-default navbar-fixed-bottom">
           <div class="container">
-              <div class="row text-center" style="margin-top: 18px">&copy;2021 leesure. All Rights Reserved.</div>
+              <div class="row text-center" id="copyright">&copy;2021 leesure. All Rights Reserved.</div>
           </div>
         </nav>
     </div>
@@ -71,10 +81,4 @@
 {#        </tr>#}
 {#    </table>#}
 {#</form>#}
-    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-
-</body>
-</html>
+{% endblock %}

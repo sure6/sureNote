@@ -20,7 +20,7 @@ from sureNote import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index', views.index_view),
+    path('index', views.index_view, name="index"),
     path('user/', include('user.urls')),
     path('note/', include('note.urls')),
 ]
